@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Commerce Site</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <header class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">ShopZone</h1>
+    <nav>
+      <a href="cart.html" class="text-blue-500 font-medium">Cart</a>
+    </nav>
+  </header>
+
+  <main class="p-4">
+    <input type="text" id="search" placeholder="Search..." class="p-2 border rounded mb-4 w-full max-w-md">
+    <div class="flex space-x-4 mb-4">
+      <select id="filterCategory" class="p-2 border rounded">
+        <option value="">All Categories</option>
+      </select>
+      <select id="sortPrice" class="p-2 border rounded">
+        <option value="">Sort by</option>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </select>
+    </div>
+    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+  </main>
+
+  <script src="data/products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

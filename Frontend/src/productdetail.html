@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind Project</title>
+  <link href="../dist/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="../font.awesome/css/font-awesome.min.css">
+  
+</head>
+<body class="capitalize">
+    
+<nav class="bg-white flex flex-wrap items-center justify-between h-[80px] w-[88%] mx-auto px-4">
+
+  <!-- Logo -->
+  <div class="flex items-center space-x-2">
+    <img class="h-10" src="../img/Brand/logo-symbol.svg" alt="">
+    <span class="text-[28px] text-[#8CB7F5] font-extrabold">Brand</span>
+  </div>
+
+  <!-- Search bar (desktop only) -->
+  <div class="hidden lg:flex items-center">
+    <input id="search"
+      class="w-64 lg:w-96 py-1 rounded-l-xl border-2 border-blue-600 pl-3"
+      type="search" placeholder="Search">
+    <button id="search-button"
+      class="bg-blue-800 py-1.5 px-3 rounded-r-xl text-white">
+      Search
+    </button>
+  </div>
+
+  <!-- Menu icons (desktop only) -->
+  <div class="hidden lg:flex text-[#8B96A5] text-[16px]" id="menu-icons">
+    <ul class="flex space-x-4 md:space-x-7 items-center">
+      <li class="flex flex-col items-center"><span class="fa fa-user"></span><span>Profile</span></li>
+      <li class="flex flex-col items-center"><span class="fa fa-comment"></span><span>Message</span></li>
+      <li class="flex flex-col items-center"><span class="fa fa-first-order"></span><span>Order</span></li>
+      <li class="flex flex-col items-center"><span class="fa fa-cart-plus carts"></span><span>Carts</span></li>
+    </ul>
+  </div>
+
+  <!-- Mobile menu button -->
+  <button id="mobile-menu-button" class="lg:hidden text-blue-800 text-2xl">
+    <i class="fa fa-bars"></i>
+  </button>
+
+</nav>
+
+<!-- Mobile Menu (hidden by default) -->
+<div id="mobile-menu" class="hidden lg:hidden bg-white w-[90%] mx-auto px-4 py-2 shadow-md">
+  <ul class="flex flex-col space-y-3 text-[#8B96A5] text-[16px]">
+    <li class="flex items-center space-x-2"><span class="fa fa-user"></span><span>Profile</span></li>
+    <li class="flex items-center space-x-2"><span class="fa fa-comment"></span><span>Message</span></li>
+    <li class="flex items-center space-x-2"><span class="fa fa-first-order"></span><span>Order</span></li>
+    <li class="flex items-center space-x-2"><span class="fa fa-cart-plus carts"></span><span>Carts</span></li>
+  </ul>
+</div>
+
+
+
+
+
+<header class="flex flex-wrap items-center justify-between w-[88%] mx-auto mt-2 px-4 py-2 bg-white shadow-sm rounded-xl">
+
+  <!-- Left menu items -->
+  <ul class="flex flex-wrap items-center space-x-4 text-[15px] text-gray-600">
+    <li><i class="fa fa-bars text-blue-700"></i></li>
+    <li class="hidden sm:inline">All Categories</li>
+    <li class="hidden sm:inline">Hot Offers</li>
+    <li class="hidden md:inline">Gift Boxes</li>
+    <li class="hidden md:inline">Project</li>
+    <li class="hidden lg:inline">Menu Item</li>
+    <li class="hidden sm:inline">Help <i class="fa fa-angle-down"></i></li>
+  </ul>
+
+  <!-- Right language + shipping -->
+  <ul class="flex items-center space-x-6 text-[15px] text-gray-600">
+    <li class="hidden sm:inline">English, USD</li>
+    <li>Ship to <i class="fa fa-angle-down"></i></li>
+  </ul>
+
+  <!-- Mobile Menu Icon -->
+  <button id="header-menu-btn" class="sm:hidden text-blue-700 text-xl">
+    <i class="fa fa-ellipsis-v"></i>
+  </button>
+
+
+
+<div id="header-mobile-menu" class="hidden flex flex-col items-start bg-white w-[90%] mx-auto mt-2 p-4 rounded-xl shadow-md text-gray-700">
+  <ul class="space-y-2 text-[15px]">
+    <li>All Categories</li>
+    <li>Hot Offers</li>
+    <li>Gift Boxes</li>
+    <li>Project</li>
+    <li>Menu Item</li>
+    <li>Help</li>
+    <li>English, USD</li>
+    <li>Ship to</li>
+  </ul>
+</div>
+
+
+
+
+
+</header>
+<section class="w-[85%] md:w-[90%] mx-auto mt-4 mr-4">
+  <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
+    <li class="flex items-center">home <span class="fa fa-angle-right mx-1"></span></li>
+    <li class="flex items-center">clothes <span class="fa fa-angle-right mx-1"></span></li>
+    <li class="flex items-center">mens wear <span class="fa fa-angle-right mx-1"></span></li>
+    <li class="flex items-center">summer clothes</li>
+  </ul>
+</section>
+
+
+
+<div class="productDetail w-[90%] max-w-6xl mx-auto p-4 flex flex-col md:flex-row mb-10 pb-10">
+  <!-- Your existing content stays here -->
+</div>
+
+   
+
+
+
+
+
+
+
+<section  class="w-[85%] mx-auto mt-4 relatedProducts flex flex-wrap gap-2 sm:mr-40  ">
+  <!-- Dynamic related products will be injected here by JS -->
+</section>
+
+
+
+
+
+
+
+
+</section>
+
+
+ <section class="w-10/12 max-w-6xl mx-auto mt-6 bg-gray-200 rounded p-6 text-center">
+    <h3 class="text-lg font-bold">Subscribe to our newsletter</h3>
+    <p class="mt-2">Get daily news on upcoming offers from many suppliers all over the world</p>
+    <div class="mt-4 flex flex-col sm:flex-row justify-center gap-2">
+      <input type="email" placeholder="Email" class="p-2 rounded border w-full sm:w-1/2" />
+      <button class="bg-blue-700 text-white px-4 py-2 rounded">Subscribe</button>
+    </div>
+  </section>
+
+
+    <!-- FOOTER -->
+  <footer class="w-10/12 max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-6 gap-6 pb-12">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3">
+        <img class="h-8" src="../img/Brand/logo-symbol.svg" alt="logo" />
+        <span class="text-xl font-extrabold text-[#127FFF]">Brand</span>
+      </div>
+      <p class="mt-4 text-sm">Best information about company. Lorem ipsum dolor sit amet.</p>
+      <ul class="flex gap-3 mt-4 text-sm">
+        <li><a href="#" class="fa fa-facebook-f"></a></li>
+        <li><a href="#" class="fa fa-twitter"></a></li>
+        <li><a href="#" class="fa fa-linkedin"></a></li>
+        <li><a href="#" class="fa fa-instagram"></a></li>
+      </ul>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">About</h4>
+      <p>About Us<br/>Find store<br/>Categories<br/>Blogs</p>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">Partnership</h4>
+      <p>About Us<br/>Find store<br/>Categories<br/>Blogs</p>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">Information</h4>
+      <p>Help center<br/>Money refund<br/>Shipping<br/>Contact us</p>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">For user</h4>
+      <p>Login<br/>Register<br/>Setting<br/>Orders</p>
+    </div>
+  </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const productDiv = document.querySelector(".productDetail");
+  const relatedDiv = document.querySelector(".relatedProducts");
+
+  const selectedId = localStorage.getItem("selectedProductId");
+  const allProductsRaw = localStorage.getItem("allProducts");
+
+  if (!selectedId || !allProductsRaw) {
+    productDiv.innerHTML = "<h2 class='text-center text-red-500 font-bold'>Product not found!</h2>";
+    return;
+  }
+
+  const allProducts = JSON.parse(allProductsRaw);
+  const product = allProducts.find(p => String(p.id) === String(selectedId));
+
+  if (!product) {
+    productDiv.innerHTML = "<h2 class='text-center text-red-500 font-bold'>Product not found!</h2>";
+    return;
+  }
+
+  // ----------------------------
+  // Render main product
+  // ----------------------------
+  productDiv.innerHTML = `
+    <div class="p-5 border bg-white w-full max-w-4xl ml-3 mx-auto flex flex-col md:flex-row h-auto md:h-[250px]">
+      <img src="${product.image}" 
+           class="w-28 h-44 p-2 md:w-28 md:h-28 object-contain mx-auto md:mx-0 md:ml-6 mt-4 md:mt-4">
+      <div class="h-auto md:h-full w-full md:w-3/4 mt-4 md:mt-0 md:ml-6 px-2 md:px-0">
+        <h1 class="text-xl md:text-2xl font-bold text-black">${product.title}</h1>
+        <h2 class="text-lg md:text-xl text-green-600 md:mt-2 font-extrabold">$${product.price}</h2>
+        <p class="mt-2 text-gray-700 text-sm md:text-base">${product.description}</p>
+        <p class="mt-1 text-gray-500 text-sm">Category: ${product.category}</p>
+        <button onclick="addToCart(event, ${product.id})" 
+                class="bg-blue-600 text-white mb-4 px-3 py-1 rounded mt-1 text-sm md:text-base">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  `;
+
+  // ----------------------------
+  // Related products
+  // ----------------------------
+  let related = allProducts.filter(p => p.category === product.category && p.id != product.id);
+  let displayProducts = related.slice(0, 5);
+
+  if (displayProducts.length < 5) {
+    const others = allProducts.filter(p => p.id != product.id && !related.includes(p)).slice(0, 5 - displayProducts.length);
+    displayProducts = displayProducts.concat(others);
+  }
+
+  relatedDiv.innerHTML = "";
+
+  displayProducts.forEach(p => {
+    const item = document.createElement("div");
+    item.className = "border p-3 flex flex-col items-center hover:shadow-lg transition duration-300";
+
+    item.innerHTML = `
+      <img src="${p.image}" class="h-28 w-28 object-contain mb-2 cursor-pointer">
+      <h3 class="font-medium text-sm text-center cursor-pointer">${p.title.slice(0, 20)}...</h3>
+      <p class="text-green-600 font-bold text-sm mt-1">$${p.price}</p>
+      <button class="bg-blue-600 text-white px-2 py-1 mt-2 rounded text-sm">Add to Cart</button>
+    `;
+
+    // Click product image or title → view detail
+    item.querySelectorAll("img, h3").forEach(el => {
+      el.addEventListener("click", () => {
+        localStorage.setItem("selectedProductId", p.id);
+        window.location.href = "./productdetail.html";
+      });
+    });
+
+    // Add to cart button
+    item.querySelector("button").addEventListener("click", (e) => addToCart(e, p.id, false));
+
+    relatedDiv.appendChild(item);
+  });
+});
+
+// ----------------------------
+// Add to cart function
+// ----------------------------
+function addToCart(event, id, redirect = true) {
+  event.stopPropagation();
+
+  const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
+  const product = allProducts.find(p => p.id == id);
+  if (!product) return alert("Product not found");
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    alert("Please login first!");
+    window.location.href = "./form.html";
+    return;
+  }
+
+  const cartKey = `cart_${user.email}`;
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+  const existing = cart.find(item => item.id == id);
+  if (existing) existing.qty += 1;
+  else cart.push({ ...product, qty: 1 });
+
+  localStorage.setItem(cartKey, JSON.stringify(cart));
+
+  if (redirect) window.location.href = "./cart.html";
+}
+
+
+
+
+
+
+
+
+
+ const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+   const headerMenuBtn = document.getElementById('header-menu-btn');
+  const headerMobileMenu = document.getElementById('header-mobile-menu');
+
+  // Toggle the mobile menu when button is clicked
+  headerMenuBtn.addEventListener('click', () => {
+    headerMobileMenu.classList.toggle('hidden');
+  });
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

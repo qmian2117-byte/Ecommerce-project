@@ -1,0 +1,54 @@
+ <div class="w-[70%] h-full  ">
+     <div class="w-full h-[35%]  flex border-2 mt-3">
+                <div class="w-[10%]  h-full pl-4 pt-4  ">
+                 <img src="../img/image 34.png" alt="" class="max-w-20  border-2">
+                </div>
+                <div class="w-[70%] h-full pt-4 pl-5">
+                  <h1 class="font-bold">T-shirts with multiple colors, for men and lady</h1>
+                  <h1>size: medium, Color: blue,  Material: Plastic</h1>
+                  <h1>seller: Artel Market</h1>
+                  <button class="p-1 rounded mt-3  text-red-500 border-2">remove</button>
+                  <button class="p-1  rounded mt-3  text-blue-600 border-2">save for later</button>
+
+     </div>
+
+
+
+     
+     <div class="w-[30%] h-full  text-end ">
+       <h1 class="mr-7 mt-5">$99.00</h1>
+       <button class="px-8 py-2 mt-4  mr-7 rounded border-2 ">qyt:9 <span class="fa fa-angle-down pl-6"></span></button>
+     </div>
+     </div>
+
+
+
+
+
+
+   
+
+
+
+
+        
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>

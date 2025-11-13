@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .relative:hover .group-hover\:block {
+        display: block;
+      }
+    </style>
+    <title>Shopping Cart</title>
+  </head>
+  <body class="bg-gray-100">
+    <%- include('partials/header') %>
+
+    <div class="container mx-auto py-8 px-4">
+      <h1 class="text-3xl font-bold text-center">Shopping Cart</h1>
+
+      <!-- Check if cart is not defined or empty -->
+      <% if (!cart || cart.length === 0) { %>
+      <p class="text-1xl font-bold text-center">Your cart is empty.</p>
+      <div class="mt-6">
+        <a href="/products" class="text-blue-500 hover:underline"
+          >Back to Products</a
+        >
+      </div>
+      <% } else { %>
+      <p class="text-lg font-semibold text-center mt-4">
+        You have <%= cart.length %> item<%= cart.length > 1 ? 's' : '' %> in
+        your cart.
+      </p>
+
+      <!-- Display Cart Items -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-md rounded-lg text-left">
+          <thead>
+            <tr class="bg-gray-200 text-gray-700 uppercase text-sm">
+              <th class="py-3 px-4">Product</th>
+              <th class="py-3 px-4">Quantity</th>
+              <th class="py-3 px-4">Price</th>
+              <th class="py-3 px-4">Total</th>
+              <th class="py-3 px-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600">
+            <% let total = 0; %> <% cart.forEach(item => { %> <% let itemTotal =
+            item.price * item.quantity; %> <% total += itemTotal; %>
+
+            <tr class="border-b hover:bg-gray-50">
+              <td class="py-3 px-4"><%= item.name %></td>
+              <td class="py-3 px-4">
+                <form
+                  action="/cart/update/<%= item.productId %>"
+                  method="POST"
+                  class="flex items-center"
+                >
+                  <button
+                    formaction="/cart/decrease/<%= item.productId %>"
+                    class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400"
+                    type="submit"
+                  >
+                    -
+                  </button>
+                  <span class="mx-2"><%= item.quantity %></span>
+                  <button
+                    formaction="/cart/increase/<%= item.productId %>"
+                    class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400"
+                    type="submit"
+                  >
+                    +
+                  </button>
+                </form>
+              </td>
+              <td class="py-3 px-4"><%= item.price %> Rs</td>
+              <td class="py-3 px-4"><%= itemTotal %> Rs</td>
+              <td class="py-3 px-4">
+                <form action="/cart/remove/<%= item.productId %>" method="POST">
+                  <button
+                    type="submit"
+                    class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Total Amount and Checkout -->
+      <div class="flex justify-between items-center mt-6">
+        <h2 class="text-2xl font-semibold text-gray-800">
+          Total: Rs <%= total %>
+        </h2>
+        <a
+          href="/checkout"
+          class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          >Proceed to Checkout</a
+        >
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Signup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg forms-container">
+
+  <!-- Login Form -->
+  <div class="form login">
+    <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+    <form id="loginForm" class="space-y-4">
+      <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border rounded-lg" required>
+      <div class="relative">
+        <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg password" required>
+        <i class='bx bx-hide eye-icon absolute right-3 top-3 cursor-pointer text-gray-500'></i>
+      </div>
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Login</button>
+      <p class="error-msg text-red-500 text-center"></p>
+    </form>
+    <p class="mt-4 text-center">Don't have an account? <a href="#" class="signup-link text-blue-500 font-semibold">Signup</a></p>
+  </div>
+
+  <!-- Signup Form -->
+  <div class="form signup hidden">
+    <h2 class="text-2xl font-bold text-center mb-6">Signup</h2>
+    <form id="signupForm" class="space-y-4">
+      <input type="text" name="firstName" placeholder="First Name" class="w-full px-4 py-2 border rounded-lg" required>
+      <input type="text" name="lastName" placeholder="Last Name" class="w-full px-4 py-2 border rounded-lg" required>
+      <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border rounded-lg" required>
+      <div class="relative">
+        <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg password" required>
+      </div>
+      <div class="relative">
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" class="w-full px-4 py-2 border rounded-lg password" required>
+        <i class='bx bx-hide eye-icon absolute right-3 top-3 cursor-pointer text-gray-500'></i>
+      </div>
+      <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">Signup</button>
+      <p class="error-msg text-red-500 text-center"></p>
+    </form>
+    <p class="mt-4 text-center">Already have an account? <a href="#" class="login-link text-blue-500 font-semibold">Login</a></p>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
+  const loginDiv = document.querySelector(".form.login");
+  const signupDiv = document.querySelector(".form.signup");
+
+  // Password toggle
+  document.querySelectorAll(".eye-icon").forEach(icon => {
+    icon.addEventListener("click", () => {
+      const pw = icon.parentElement.querySelector(".password");
+      if(pw) pw.type = pw.type === "password" ? "text" : "password";
+      icon.classList.toggle("bx-show");
+      icon.classList.toggle("bx-hide");
+    });
+  });
+
+  function redirectHome() { window.location.href="home.html"; }
+  function displayError(form, msg){ const el=form.querySelector(".error-msg"); if(el){el.textContent=msg;} }
+  function clearError(form){ const el=form.querySelector(".error-msg"); if(el) el.textContent=""; }
+
+  async function postData(url,payload){
+    try{
+      const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+      const data=await res.json().catch(()=>({message:"Invalid server response"}));
+      return {ok:res.ok,data};
+    }catch(err){return {ok:false,data:{message:"Server not reachable"}};}
+  }
+
+  function storeUser(token,userData){ 
+    localStorage.setItem("authToken",token); 
+    localStorage.setItem("userName",userData.firstName||userData.email||"User"); 
+  }
+  function getToken(data){ return data?.token||data?.jwt||data?.data?.token; }
+
+  // Form toggle
+  document.querySelector(".signup-link").addEventListener("click", e=>{
+    e.preventDefault(); 
+    loginDiv.classList.add("hidden"); 
+    signupDiv.classList.remove("hidden");
+  });
+  document.querySelector(".login-link").addEventListener("click", e=>{
+    e.preventDefault(); 
+    signupDiv.classList.add("hidden"); 
+    loginDiv.classList.remove("hidden");
+  });
+
+  // Login
+  loginForm.addEventListener("submit", async e=>{
+    e.preventDefault(); clearError(loginForm);
+    const email=loginForm.email.value.trim(); 
+    const password=loginForm.password.value.trim();
+    if(!email||!password){ displayError(loginForm,"Fill all fields"); return;}
+    const {ok,data}=await postData("http://localhost:8000/users/login",{email,password});
+    if(ok){ const token=getToken(data); if(token){ storeUser(token,data); redirectHome(); } else displayError(loginForm,"No token received"); }
+    else displayError(loginForm,data.message||"Login failed");
+  });
+
+  // Signup
+  signupForm.addEventListener("submit", async e=>{
+    e.preventDefault(); clearError(signupForm);
+    const firstName=signupForm.firstName.value.trim();
+    const lastName=signupForm.lastName.value.trim();
+    const email=signupForm.email.value.trim();
+    const password=signupForm.password.value.trim();
+    const confirm=signupForm.confirmPassword.value.trim();
+    if(!firstName||!lastName||!email||!password||!confirm){ displayError(signupForm,"Fill all fields"); return;}
+    if(password!==confirm){ displayError(signupForm,"Passwords do not match"); return;}
+    const {ok,data}=await postData("http://localhost:8000/users/register",{firstName,lastName,email,password});
+    if(ok){ 
+      const token=getToken(data);
+      if(token){ storeUser(token,{firstName,email}); redirectHome(); } 
+      else displayError(signupForm,"No token received");
+    }
+    else displayError(signupForm,data.message||"Signup failed");
+  });
+
+});
+</script>
+
+</body>
+</html>

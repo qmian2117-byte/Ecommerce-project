@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="../font.awesome/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="../input.css">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+
+
+<body class="capitalize">
+   
+<nav class="bg-white flex flex-wrap items-center justify-between h-[80px] w-[90%] mx-auto px-4">
+
+  <!-- Logo -->
+  <div class="flex items-center space-x-2">
+    <img class="h-10" src="../img/Brand/logo-symbol.svg" alt="">
+    <span class="text-[28px] text-[#8CB7F5] font-extrabold">Brand</span>
+  </div>
+
+  <!-- Search bar (desktop only) -->
+  <div class="hidden lg:flex items-center">
+    <input id="search"
+      class="w-64 lg:w-96 py-1 rounded-l-xl border-2 border-blue-600 pl-3"
+      type="search" placeholder="Search">
+    <button id="search-button"
+      class="bg-blue-800 py-1.5 px-3 rounded-r-xl text-white">
+      Search
+    </button>
+  </div>
+
+  <!-- Menu icons (desktop only) -->
+  <div class="hidden lg:flex text-[#8B96A5] text-[16px]" id="menu-icons">
+    <ul class="flex space-x-4 md:space-x-7 items-center">
+      <li class="flex flex-col items-center"><span class="fa fa-user"></span><span>Profile</span></li>
+      <li class="flex flex-col items-center"><span class="fa fa-comment"></span><span>Message</span></li>
+      <li class="flex flex-col items-center"><span class="fa fa-first-order"></span><span>Order</span></li>
+      <li class="flex flex-col items-center"><span class="fa fa-cart-plus carts"></span><span>Carts</span></li>
+    </ul>
+  </div>
+
+  <!-- Mobile menu button -->
+  <button id="mobile-menu-button" class="lg:hidden text-blue-800 text-2xl">
+    <i class="fa fa-bars"></i>
+  </button>
+
+</nav>
+
+<!-- Mobile Menu (hidden by default) -->
+<div id="mobile-menu" class="hidden lg:hidden bg-white w-[90%] mx-auto px-4 py-2 shadow-md">
+  <ul class="flex flex-col space-y-3 text-[#8B96A5] text-[16px]">
+    <li class="flex items-center space-x-2"><span class="fa fa-user"></span><span>Profile</span></li>
+    <li class="flex items-center space-x-2"><span class="fa fa-comment"></span><span>Message</span></li>
+    <li class="flex items-center space-x-2"><span class="fa fa-first-order"></span><span>Order</span></li>
+    <li class="flex items-center space-x-2"><span class="fa fa-cart-plus carts"></span><span>Carts</span></li>
+  </ul>
+</div>
+
+
+
+
+
+<header class="flex flex-wrap items-center justify-between w-[87%] mx-auto mt-2 px-4 py-2 bg-white shadow-sm rounded-xl">
+
+  <!-- Left menu items -->
+  <ul class="flex flex-wrap items-center space-x-4 text-[15px] text-gray-600">
+    
+    <li class="hidden sm:inline">All Categories</li>
+    <li class="hidden sm:inline">Hot Offers</li>
+    <li class="hidden md:inline">Gift Boxes</li>
+    <li class="hidden md:inline">Project</li>
+    <li class="hidden lg:inline">Menu Item</li>
+    <li class="hidden sm:inline">Help <i class="fa fa-angle-down"></i></li>
+  </ul>
+
+  <!-- Right language + shipping -->
+  <ul class="flex items-center space-x-6 text-[15px] text-gray-600">
+    <li class="hidden sm:inline">English, USD</li>
+    <li>Ship to <i class="fa fa-angle-down"></i></li>
+  </ul>
+
+  <!-- Mobile Menu Icon -->
+  <button id="header-menu-btn" class="sm:hidden text-blue-700 text-xl">
+    <i class="fa fa-ellipsis-v"></i>
+  </button>
+
+
+
+<div id="header-mobile-menu" class="hidden flex flex-col items-start bg-white w-[90%] mx-auto mt-2 p-4 rounded-xl shadow-md text-gray-700">
+  <ul class="space-y-2 text-[15px]">
+    <li>All Categories</li>
+    <li>Hot Offers</li>
+    <li>Gift Boxes</li>
+    <li>Project</li>
+    <li>Menu Item</li>
+    <li>Help</li>
+    <li>English, USD</li>
+    <li>Ship to</li>
+  </ul>
+</div>
+
+
+
+
+
+</header>
+
+<!-- Mobile Dropdown (hidden by default) -->
+
+
+<!-- Toggle Script -->
+
+  
+
+
+
+
+
+
+ <section class="w-[85%] md:w-[85%] mx-auto mt-4 flex flex-col md:flex-row border-2 rounded-xl overflow-hidden">
+
+  <!-- LEFT: Category Sidebar -->
+  <div class="w-full md:w-[30%] bg-white text-[18px] p-3 border-r md:border-r-2">
+    <h1 class="bg-[#E5F1FF] py-2 px-2 rounded hover:border-2 border-fuchsia-600 cursor-pointer">Automobiles</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">Clothes and Wear</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">Home Interiors</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">Computer and Tech</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">Tools & Equipment</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">Sports & Outdoor</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">Animal & Pets</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">Machinery Tools</h1>
+    <h1 class="mt-2 hover:border-2 border-fuchsia-600 cursor-pointer">More Categories</h1>
+  </div>
+
+  <!-- MIDDLE: Main Banner -->
+  <div class="w-full md:w-[50%] h-[250px] md:h-[400px]">
+    <img src="../img/bs.png" alt="banner" class="w-full h-full object-cover">
+  </div>
+
+  <!-- RIGHT: User Info + Boxes -->
+  <div class="w-full md:w-[20%] bg-[#E3F0FF] flex flex-col items-center py-4">
+    
+    <!-- User Info -->
+    <div class="flex items-center space-x-3">
+      <div class="w-12 h-12 bg-slate-600 rounded-full overflow-hidden">
+        <img src="../img/photo.png" alt="user" class="p-2">
+      </div>
+      <div>
+        <h1 class="font-semibold text-[16px]">Hi, User</h1>
+        <p class="text-[14px] text-gray-600">Let's get started</p>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex flex-col mt-4 space-y-2">
+      <button class="py-1 bg-[#127FFF] px-10 rounded text-white font-semibold hover:bg-blue-700 transition joinNowBtn">
+        Join Now
+      </button>
+      <button class="py-1 px-10 rounder bg-black border border-gray-300 hover:bg-gray-100 transition loginBtn">
+        Login
+      </button>
+    </div>
+
+    <!-- Offer Boxes -->
+    <div class="w-[90%] bg-[#F38332] text-white rounded mt-4 p-3 text-sm text-center">
+      <h1>Get US $10 off</h1>
+      <h1>with a new supplier</h1>
+    </div>
+
+    <div class="w-[90%] bg-[#55BDC3] text-white rounded mt-3 p-3 text-sm text-center">
+      <h1>Send quotes with</h1>
+      <h1>supplier preferences</h1>
+    </div>
+
+
+<div class="w-[90%] bg-[#55c390] text-white rounded mt-3 p-3 text-sm text-center">
+      <h1>new quotes with</h1>
+      <h1>supplier preferences</h1>
+    </div>
+
+
+  </div>
+</section>
+
+
+
+
+ <section class="w-[88%] max-w-[1300px] h-auto mx-auto mt-2 justify-center">
+  <div class="w-full h-full flex flex-wrap  product3 justify-center">
+    <!-- JS injected cards -->
+  </div>
+</section>
+
+
+<section class="w-[90%] mx-auto flex flex-col  ">
+
+  <!-- Product4 Row -->
+  <div class="w-full flex flex-wrap  product4 justify-center sm:justify-center ">
+    <!-- JS will inject product cards here -->
+  </div>
+
+  <!-- Product5 Row -->
+  <div class="w-full flex flex-wrap  product5 justify-center sm:justify-center ">
+    <!-- JS will inject product cards here -->
+  </div>
+
+</section>
+
+
+<section class="w-[90%] mx-auto flex flex-col  ">
+
+  <!-- Product4 Row -->
+  <div class="w-full flex flex-wrap  product6 justify-center sm:justify-center ">
+    <!-- JS will inject product cards here -->
+  </div>
+
+  <!-- Product5 Row -->
+  <div class="w-full flex flex-wrap  product7 justify-center sm:justify-center">
+    <!-- JS will inject product cards here -->
+  </div>
+
+</section>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    <section class="w-11/12 max-w-6xl mx-auto mt-6 bg-gradient-to-t from-[#2C7CF1] to-[#00D1FF80] rounded-md p-6 text-white grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <h2 class="text-2xl font-bold">An easy way to send requests to all suppliers</h2>
+      <p class="mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+    </div>
+    <div class="bg-white p-4 rounded text-gray-800">
+      <h4 class="font-bold">Send quote to supplier</h4>
+      <input type="text" placeholder="what item you need" class="w-full border p-2 mt-3 rounded" />
+      <textarea placeholder="type more detail" class="w-full border p-2 mt-3 rounded h-24"></textarea>
+      <div class="flex gap-2 mt-3">
+        <input type="text" value="quantity" class="w-1/2 border p-2 rounded text-center" />
+        <input type="text" value="pcs" class="w-1/2 border p-2 rounded" />
+      </div>
+      <button class="mt-3 bg-blue-600 text-white px-4 py-2 rounded">Send enquiries</button>
+    </div>
+  </section>
+
+
+  <div class="w-[85%] h-[50px] mx-auto ">
+<h1 class="text-[25px]">recommended items</h1>
+ </div>
+
+ <!-- Product 1 Section -->
+<!-- Product 1 Section -->
+<section class="w-[80%] max-w-[1300px]  mx-auto flex flex-wrap justify-center md:justify-center  product1">
+  <!-- JS will inject cards here -->
+</section>
+
+<!-- Product 2 Section -->
+<section class="w-[80%] max-w-[1300px] mx-auto flex flex-wrap justify-center md:justify-center product2">
+  <!-- JS will inject cards here -->
+</section>
+
+
+
+  <section class="w-10/12 max-w-6xl mx-auto mt-6">
+    <h3 class="text-xl font-semibold mb-3">Supplier by region</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/flags/Property 1=AE.png" class="w-12 h-8 object-cover" alt="AE" />
+        <div><div class="font-bold">Arabic Emirates</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/flags/Property 1=AE.png" class="w-12 h-8 object-cover" alt="AE" />
+        <div><div class="font-bold">Arabic Emirates</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/image/Image/flags/Property 1=AU.png" class="w-12 h-8 object-cover" alt="AU" />
+        <div><div class="font-bold">Australia</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/Image/flags/Property 1=US.png" class="w-12 h-8 object-cover" alt="US" />
+        <div><div class="font-bold">United State</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/Image/flags/Property 1=RU.png" class="w-12 h-8 object-cover" alt="RU" />
+        <div><div class="font-bold">Russia</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-10/12 max-w-6xl mx-auto mt-6">
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/flags/Property 1=AE.png" class="w-12 h-8 object-cover" alt="AE" />
+        <div><div class="font-bold">Arabic Emirates</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/flags/Property 1=AE.png" class="w-12 h-8 object-cover" alt="AE" />
+        <div><div class="font-bold">Arabic Emirates</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/image/Image/flags/Property 1=AU.png" class="w-12 h-8 object-cover" alt="AU" />
+        <div><div class="font-bold">Australia</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/Image/flags/Property 1=US.png" class="w-12 h-8 object-cover" alt="US" />
+        <div><div class="font-bold">United State</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <img src="../img/Image/Image/flags/Property 1=RU.png" class="w-12 h-8 object-cover" alt="RU" />
+        <div><div class="font-bold">Russia</div><div class="text-xs">shopname.ae</div></div>
+      </div>
+    </div>
+  </section>
+
+ <!-- newsletter -->
+  <section class="w-10/12 max-w-6xl mx-auto mt-6 bg-gray-200 rounded p-6 text-center">
+    <h3 class="text-lg font-bold">Subscribe to our newsletter</h3>
+    <p class="mt-2">Get daily news on upcoming offers from many suppliers all over the world</p>
+    <div class="mt-4 flex flex-col sm:flex-row justify-center gap-2">
+      <input type="email" placeholder="Email" class="p-2 rounded border w-full sm:w-1/2" />
+      <button class="bg-blue-700 text-white px-4 py-2 rounded">Subscribe</button>
+    </div>
+  </section>
+
+
+    <!-- FOOTER -->
+  <footer class="w-10/12 max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-6 gap-6 pb-12">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3">
+        <img class="h-8" src="../img/Brand/logo-symbol.svg" alt="logo" />
+        <span class="text-xl font-extrabold text-[#127FFF]">Brand</span>
+      </div>
+      <p class="mt-4 text-sm">Best information about company. Lorem ipsum dolor sit amet.</p>
+      <ul class="flex gap-3 mt-4 text-sm">
+        <li><a href="#" class="fa fa-facebook-f"></a></li>
+        <li><a href="#" class="fa fa-twitter"></a></li>
+        <li><a href="#" class="fa fa-linkedin"></a></li>
+        <li><a href="#" class="fa fa-instagram"></a></li>
+      </ul>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">About</h4>
+      <p>About Us<br/>Find store<br/>Categories<br/>Blogs</p>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">Partnership</h4>
+      <p>About Us<br/>Find store<br/>Categories<br/>Blogs</p>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">Information</h4>
+      <p>Help center<br/>Money refund<br/>Shipping<br/>Contact us</p>
+    </div>
+
+    <div class="text-sm">
+      <h4 class="font-bold mb-2">For user</h4>
+      <p>Login<br/>Register<br/>Setting<br/>Orders</p>
+    </div>
+  </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // -------------------------------
+  // Navbar & Buttons
+  // -------------------------------
+  const joinNowBtn = document.querySelector(".joinNowBtn");
+  const loginBtn = document.querySelector(".loginBtn");
+
+  function updateNavbar() {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      // User is logged in
+      if (joinNowBtn) joinNowBtn.style.display = "none";
+      if (loginBtn) {
+        loginBtn.textContent = "Logout";
+        loginBtn.classList.add("bg-red-500","text-white");
+        loginBtn.removeEventListener("click", goToForm);
+        loginBtn.addEventListener("click", logoutUser);
+      }
+    } else {
+      // User is not logged in
+      if (joinNowBtn) joinNowBtn.style.display = "inline-block";
+      if (loginBtn) {
+        loginBtn.textContent = "Login";
+        loginBtn.classList.remove("bg-red-500","text-white");
+        loginBtn.addEventListener("click", goToForm);
+      }
+    }
+  }
+
+  function goToForm() {
+    window.location.href = "form.html";
+  }
+
+  function logoutUser() {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userName");
+    updateNavbar();
+    alert("You have logged out!");
+    window.location.href = "home.html";
+  }
+
+  if (joinNowBtn) joinNowBtn.addEventListener("click", goToForm);
+  if (loginBtn) loginBtn.addEventListener("click", goToForm);
+
+  // Initialize navbar
+  updateNavbar();
+
+  // -------------------------------
+  // Products
+  // -------------------------------
+  const productsdiv1 = document.querySelector('.product1');
+  const productsdiv2 = document.querySelector('.product2');
+  const productsdiv3 = document.querySelector('.product3');
+  const productsdiv4 = document.querySelector('.product4');
+  const productsdiv5 = document.querySelector('.product5');
+  const productsdiv6 = document.querySelector('.product6');
+  const productsdiv7 = document.querySelector('.product7');
+
+  const searchInput = document.getElementById('search');   
+  const searchButton = document.getElementById('search-button');
+  const categoryElements = document.querySelectorAll('section:first-child h1');
+
+  let allProducts = [];
+  let selectedCategory = "";
+
+  async function fetchProducts() {
+    try {
+      const res = await fetch("http://localhost:8000/products");
+      allProducts = await res.json();
+      displayAllProducts();
+    } catch (err) {
+      console.error("Error fetching products:", err);
+    }
+  }
+
+  function displayAllProducts() {
+    [productsdiv1, productsdiv2, productsdiv3, productsdiv4, productsdiv5, productsdiv6, productsdiv7].forEach(div => div.innerHTML = "");
+
+    allProducts.slice(0,4).forEach(p => productsdiv1.innerHTML += productCard(p, "small"));
+    allProducts.slice(5,9).forEach(p => productsdiv2.innerHTML += productCard(p, "small"));
+    allProducts.slice(10,14).forEach(p => productsdiv4.innerHTML += productCard(p, "medium"));
+    allProducts.slice(14,18).forEach(p => productsdiv5.innerHTML += productCard(p, "medium"));
+    allProducts.slice(3,7).forEach(p => productsdiv6.innerHTML += productCard(p, "medium"));
+    allProducts.slice(8,12).forEach(p => productsdiv7.innerHTML += productCard(p, "medium"));
+
+    displayProduct3();
+  }
+
+  function displayProduct3() {
+    productsdiv3.innerHTML = "";
+
+    let filtered = allProducts.filter(p => {
+      const matchCategory = selectedCategory ? p.productCategory.toLowerCase().includes(selectedCategory.toLowerCase()) : true;
+      const matchSearch = searchInput.value.trim() ? p.productName.toLowerCase().includes(searchInput.value.trim().toLowerCase()) : true;
+      return matchCategory && matchSearch;
+    });
+
+    let productsToShow = [...filtered];
+    if (productsToShow.length < 10) {
+      const remaining = 10 - productsToShow.length;
+      const others = allProducts.filter(p => !productsToShow.includes(p));
+      productsToShow = productsToShow.concat(others.slice(0, remaining));
+    }
+
+    productsToShow.slice(0,10).forEach(p => productsdiv3.innerHTML += productCard(p, "dynamic"));
+  }
+function productCard(product, type) {
+  const imgPath = product.productImage && product.productImage !== "" ? product.productImage : "/Frontend/img/products/placeholder.jpg";
+  let html = "";
+  if (type === "small") {
+    html = `<div class="w-[45%] sm:w-[30%] md:w-[20%] border-2 p-2 flex flex-col items-center cursor-pointer mb-4 
+      hover:scale-105 hover:shadow-lg transition-transform duration-300" onclick="goToProduct('${product._id}')">
+        <img src="${imgPath}" class="w-full h-[150px] object-contain mt-4">
+        <h1 class="pt-2 font-bold">Price: $${product.productPrice}</h1>
+        <h1 class="text-sm text-center mt-1">${product.productName.slice(0,34)}${product.productName.length>30?'...':''}</h1>
+    </div>`;
+  } else if (type === "medium") {
+    html = `<div class="w-[45%] sm:w-[30%] md:w-[25%] h-full flex border-2 cursor-pointer mb-4 
+      hover:scale-105 hover:shadow-lg transition-transform duration-300" onclick="goToProduct('${product._id}')">
+        <div class="left h-full w-full mt-4 ml-2">
+          <h1 class="text-sm">${product.productName.slice(0,10)}</h1>
+          <h1 class="font-bold">Price: $${product.productPrice}</h1>
+        </div>
+        <div class="right h-full w-full bg-none mt-4">
+          <img src="${imgPath}" class="bg-none h-[120px] w-[80px] object-contain">
+        </div>
+    </div>`;
+  } else if (type === "dynamic") {
+    html = `<div class="w-1/2 sm:w-1/4 md:w-1/5 h-auto pt-5 border cursor-pointer mb-4 
+      hover:scale-105 hover:shadow-lg transition-transform duration-300" onclick="goToProduct('${product._id}')">
+        <img src="${imgPath}" class="w-full h-[100px] object-contain">
+        <div class="w-20 h-10 rounded-full bg-neutral-400 mt-2 flex items-center ml-14 justify-center"><h1>-25%</h1></div>
+    </div>`;
+  }
+
+  return html;
+}
+
+
+   window.goToProduct = function(id) {
+    localStorage.setItem("selectedProductId", id);
+    window.location.href = "./product.html";
+  };
+
+  searchButton.addEventListener('click', displayProduct3);
+  searchInput.addEventListener('keypress', e => { if(e.key==="Enter") displayProduct3(); });
+  categoryElements.forEach(cat => cat.addEventListener('click', () => { 
+    selectedCategory = cat.innerText.trim();
+    displayProduct3(); 
+  }));
+
+  // Initial fetch
+  fetchProducts();
+
+});
+
+
+
+
+
+ const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+   const headerMenuBtn = document.getElementById('header-menu-btn');
+  const headerMobileMenu = document.getElementById('header-mobile-menu');
+
+  // Toggle the mobile menu when button is clicked
+  headerMenuBtn.addEventListener('click', () => {
+    headerMobileMenu.classList.toggle('hidden');
+  });
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

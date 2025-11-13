@@ -1,0 +1,54 @@
+<!-- signin.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Signin</title>
+    <style>
+      .relative:hover .group-hover\:block {
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <%- include('partials/header') %>
+    <div class="container mx-auto mt-10">
+      <h1 class="text-2xl font-bold ml-6 text-center">Signin</h1>
+      <form action="/signin" method="POST" class="mt-4 ml-6 mr-6">
+        <div class="mb-4">
+          <label for="email" class="block">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            class="border rounded p-2 w-full"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            class="border rounded p-2 w-full"
+          />
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2">
+          Signin
+        </button>
+      </form>
+      <p class="mt-4 ml-6">
+        Don't have an account?
+        <a href="/signup" class="text-blue-500">Sign up</a>
+      </p>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

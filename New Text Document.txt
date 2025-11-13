@@ -1,0 +1,256 @@
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // ----
+  // ------------------------
+  // DOM Elements
+  // ----------------------------
+  const productsDiv = document.querySelector(".product10");
+  const categoryDiv = document.querySelector(".catagory");
+  const minInput = document.querySelector(".input-min");
+  const maxInput = document.querySelector(".input-max");
+  const rangeMin = document.querySelector(".range-min");
+  const rangeMax = document.querySelector(".range-max");
+  const searchInput = document.querySelector(".search-bar");
+  const cartIcon = document.querySelector(".carts");
+
+  let allProducts = [];
+  let categories = [];
+
+  // ----------------------------
+  // Global Cart Manager
+  // ----------------------------
+  const CartManager = (() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const cartKey = user ? `cart_${user.email}` : null;
+
+    function getCart() {
+      if (!cartKey) return [];
+      return JSON.parse(localStorage.getItem(cartKey)) || [];
+    }
+
+    function saveCart(cart) {
+      if (!cartKey) return;
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
+
+    function addToCart(product, qty = 1) {
+      if (!user) {
+        alert("Please login first!");
+        window.location.href = "./login.html";
+        return;
+      }
+
+      const cart = getCart();
+      const existing = cart.find(item => item.id === product.id);
+
+      if (existing) existing.qty += qty;
+      else cart.push({ id: product.id, title: product.title, price: product.price, image: product.image, qty });
+
+      saveCart(cart);
+      updateCartIconCount();
+    }
+
+    function removeFromCart(productId) {
+      let cart = getCart();
+      cart = cart.filter(item => item.id !== productId);
+      saveCart(cart);
+      updateCartIconCount();
+    }
+
+    function getTotalQuantity() {
+      const cart = getCart();
+      return cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    function updateCartIconCount() {
+      if (cartIcon) cartIcon.textContent = `🛒 ${getTotalQuantity()}`;
+    }
+
+    updateCartIconCount();
+
+    return { getCart, addToCart, removeFromCart, getTotalQuantity, updateCartIconCount };
+  })();
+
+  // ----------------------------
+  // Fetch Products
+  // ----------------------------
+  async function fetchProducts() {
+    try {
+      const response = await fetch("https://fakestoreapi.com/products");
+      allProducts = await response.json();
+
+      // Price range
+      const prices = allProducts.map(p => p.price);
+      minInput.value = Math.floor(Math.min(...prices));
+      maxInput.value = Math.ceil(Math.max(...prices));
+      rangeMin.value = minInput.value;
+      rangeMax.value = maxInput.value;
+
+      // Categories
+      allProducts.forEach(product => {
+        if (!categories.includes(product.category)) {
+          categories.push(product.category);
+          const label = document.createElement("label");
+          label.className = "flex items-center font-medium mb-1";
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.value = product.category;
+          checkbox.addEventListener("change", applyFilters);
+
+          const span = document.createElement("span");
+          span.className = "ml-2";
+          span.textContent = product.category;
+
+          label.appendChild(checkbox);
+          label.appendChild(span);
+          categoryDiv.appendChild(label);
+        }
+      });
+
+      applyFilters();
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+      productsDiv.innerHTML = `<h2 class="text-center text-red-500 font-bold">Failed to load products!</h2>`;
+    }
+  }
+
+  // ----------------------------
+  // Create Product HTML
+  // ----------------------------
+  function createProductHTML(product) {
+    return `
+      <div class="product-card h-auto w-full flex bg-white border-2 p-3 cursor-pointer" data-id="${product.id}">
+        <div class="w-[17%]">
+          <img src="${product.image}" alt="${product.title}" class="h-[120px] w-[120px] object-contain">
+        </div>
+        <div class="w-[70%] ml-4">
+          <h1 class="font-semibold">${product.title}</h1>
+          <h1 class="font-bold mt-2">$${product.price.toFixed(2)}</h1>
+          <p class="mt-1 text-gray-600">${product.description.slice(0, 120)}...</p>
+          <button class="add-cart-btn bg-blue-600 text-white px-3 py-1 rounded mt-2" data-id="${product.id}">Add to Cart</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // ----------------------------
+  // Display Products
+  // ----------------------------
+  function displayProducts(filteredProducts) {
+    productsDiv.innerHTML = "";
+    if (filteredProducts.length === 0) {
+      productsDiv.innerHTML = `<h2 class="text-center text-red-500 font-bold">No products found!</h2>`;
+      return;
+    }
+    filteredProducts.slice(0, 6).forEach(product => { // only first 6 products
+      const html = createProductHTML(product);
+      productsDiv.insertAdjacentHTML("beforeend", html);
+    });
+  }
+
+  // ----------------------------
+  // Apply Filters
+  // ----------------------------
+  function applyFilters() {
+    let filtered = [...allProducts];
+
+    // Category filter
+    const checkedCategories = Array.from(categoryDiv.querySelectorAll("input[type=checkbox]:checked"))
+                                   .map(cb => cb.value);
+    if (checkedCategories.length > 0) {
+      filtered = filtered.filter(p => checkedCategories.includes(p.category));
+    }
+
+    // Price filter
+    const minPrice = parseFloat(minInput.value);
+    const maxPrice = parseFloat(maxInput.value);
+    if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+      filtered = filtered.filter(p => p.price >= minPrice && p.price <= maxPrice);
+    }
+
+    // Search filter
+    const searchText = searchInput ? searchInput.value.toLowerCase() : "";
+    if (searchText.trim() !== "") {
+      filtered = filtered.filter(p =>
+        p.title.toLowerCase().includes(searchText) ||
+        p.category.toLowerCase().includes(searchText)
+      );
+    }
+
+    displayProducts(filtered);
+  }
+
+  // ----------------------------
+  // Product Click + Add to Cart
+  // ----------------------------
+  productsDiv.addEventListener("click", e => {
+    const productCard = e.target.closest(".product-card");
+
+    if (!productCard) return;
+
+    const productId = parseInt(productCard.dataset.id);
+    const product = allProducts.find(p => p.id === productId);
+    if (!product) return;
+
+    // Add to Cart
+    if (e.target.classList.contains("add-cart-btn")) {
+      e.stopPropagation();
+      CartManager.addToCart(product);
+
+      // Toast
+      const toast = document.createElement("div");
+      toast.textContent = `✅ "${product.title}" added to your cart!`;
+      toast.className = "fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50";
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+      return;
+    }
+
+    // Click product → go to product detail
+    localStorage.setItem("selectedProductId", product.id);
+    window.location.href = "./productdetail.html";
+  });
+
+  // ----------------------------
+  // Price range sync
+  // ----------------------------
+  rangeMin.addEventListener("input", e => { minInput.value = e.target.value; applyFilters(); });
+  rangeMax.addEventListener("input", e => { maxInput.value = e.target.value; applyFilters(); });
+  minInput.addEventListener("input", applyFilters);
+  maxInput.addEventListener("input", applyFilters);
+  if (searchInput) searchInput.addEventListener("input", applyFilters);
+
+  // ----------------------------
+  // Cart Icon Click
+  // ----------------------------
+  if (cartIcon) {
+    cartIcon.style.cursor = "pointer";
+    cartIcon.addEventListener("click", () => {
+      window.location.href = "./cart.html";
+    });
+  }
+
+  // ----------------------------
+  // Initialize
+  // ----------------------------
+  fetchProducts();
+});
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+   const headerMenuBtn = document.getElementById('header-menu-btn');
+  const headerMobileMenu = document.getElementById('header-mobile-menu');
+
+  // Toggle the mobile menu when button is clicked
+  headerMenuBtn.addEventListener('click', () => {
+    headerMobileMenu.classList.toggle('hidden');
+  });
+
+
+
+
+</script>

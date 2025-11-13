@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .relative:hover .group-hover\:block {
+        display: block;
+      }
+    </style>
+    <title><%= product.name %></title>
+  </head>
+  <body class="bg-gray-100">
+    <%- include('partials/header') %>
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold text-gray-800 mb-4"><%= product.name %></h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <img
+            src="<%= product.image %>"
+            alt="<%= product.name %>"
+            class="w-full h-64 object-cover rounded-lg shadow-lg"
+          />
+        </div>
+        <div class="flex flex-col justify-between">
+          <div>
+            <p class="text-lg text-gray-600 mb-2"><%= product.description %></p>
+            <p class="text-xl font-semibold text-gray-800 mb-2">
+              Price: <%= product.price %> Rs
+            </p>
+            <p class="text-sm text-gray-500 mb-1">
+              Category: <%= product.category %>
+            </p>
+            <p class="text-sm text-gray-500">In stock: <%= product.stock %></p>
+          </div>
+          <div class="mt-4 flex justify-center">
+            <form action="/cart/add/<%= product._id %>" method="POST">
+              <button
+                type="submit"
+                class="bg-blue-500 text-white w-7/10 px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
+              >
+                Add to Cart
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <a href="/products" class="text-blue-500 hover:underline"
+          >Back to Products</a
+        >
+      </div>
+    </div>
+    <%- include('partials/footer') %>
+  </body>
+</html>
